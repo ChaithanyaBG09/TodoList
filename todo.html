@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>To-Do Application</title>
+  <link rel="stylesheet" href="todo.css" />
+  <script defer src="todo.js"></script>
+</head>
+<body>
+  <header class="header">
+    <h1>TO-DO APPLICATION</h1>
+    <img src="https://cdn-icons-png.flaticon.com/512/847/847969.png" class="profile-icon" alt="Profile Icon">
+  </header>
+
+  <main class="main-container">
+    <!-- Task Input Section -->
+    <section class="task-input-section">
+      <h2><span class="plus-icon">+</span> To-do List</h2>
+      <div class="task-input">
+        <input type="text" id="taskInput" placeholder="Enter the task">
+        <button id="addTaskBtn">+</button>
+      </div>
+    </section>
+
+    <!-- Task List Section -->
+    <section class="task-list-section">
+      <h2>Your Tasks</h2>
+      <ul id="taskList"></ul>
+    </section>
+  </main>
+</body>
+</html>
