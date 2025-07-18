@@ -9,49 +9,33 @@
 <body>
   <div class="login-container">
     <h2>Login</h2>
-    <form id="loginForm">
-      <div class="form-group">
-        <label for="countryCode">Country Code</label>
-        <select id="countryCode" required>
-          <option value="">Select</option>
-          <option value="+91">+91 (India)</option>
-          <option value="+1">+1 (USA)</option>
-          <option value="+44">+44 (UK)</option>
-          <option value="+61">+61 (Australia)</option>
-          <option value="+81">+81 (Japan)</option>
+
+    <div class="input-group">
+      <label for="phone">Phone Number</label>
+      <div class="phone-input-wrapper">
+        <select id="countryCode">
+          <option value="+91">+91</option>
+          <option value="+1">+1</option>
+          <option value="+44">+44</option>
+          <option value="+61">+61</option>
         </select>
+        <input type="text" id="phone" placeholder="Enter 10-digit number" maxlength="10" />
       </div>
+      <div class="error" id="phoneError"></div>
+    </div>
 
-      <div class="form-group">
-        <label for="phoneNumber">Phone Number</label>
-        <input
-          type="tel"
-          id="phoneNumber"
-          placeholder="Enter 10-digit number"
-          maxlength="10"
-          required
-        />
-      </div>
+    <div class="input-group">
+      <label for="password">Password</label>
+      <input type="password" id="password" placeholder="Enter your password" />
+      <div class="error" id="passwordError"></div>
+    </div>
 
-      <div class="form-group">
-        <label for="password">Password</label>
-        <input
-          type="password"
-          id="password"
-          placeholder="Enter password"
-          minlength="8"
-          maxlength="12"
-          required
-        />
-      </div>
+    <button onclick="handleLogin()">Login</button>
 
-      <button id="loginBtn" type="submit">Login</button>
-
-      <div class="links">
-        <a href="#">Forgot Password?</a><br/>
-        <a href="#">Don’t have an account? Create</a>
-      </div>
-    </form>
+    <div class="links">
+      <a href="#">Forgot Password?</a>
+      <p>Don't have an account?<a href="#">Create</a></p>
+    </div>
   </div>
 
   <script src="script.js"></script>

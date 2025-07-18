@@ -1,52 +1,59 @@
-document.getElementById("phoneNumber").addEventListener("input", function () {
-  this.value = this.value.replace(/\D/g, "");
-  if (this.value.length > 10) {
-    this.value = this.value.slice(0, 10);
+function showError(elementId, message) {
+  const element = document.getElementById(elementId);
+  element.innerText = message;
+  if (message) {
+    setTimeout(() => {
+      element.innerText = '';
+    }, 5000);
   }
+}
+
+function isValidPhoneNumber(number) {
+  return /^[0-9]{10}$/.test(number);
+}
+
+function isValidPassword(password) {
+  const hasUpper = /[A-Z]/.test(password);
+  const hasLower = /[a-z]/.test(password);
+  const hasDigit = /\d/.test(password);
+  const hasSpecial = /[^A-Za-z0-9]/.test(password);
+  return hasUpper && hasLower && hasDigit && hasSpecial && password.length >= 8 && password.length <= 12;
+}
+
+function handleLogin() {
+  const phone = document.getElementById("phone").value.trim();
+  const password = document.getElementById("password").value.trim();
+  let valid = true;
+
+  // Phone validation
+  if (phone === "") {
+    showError("phoneError", "Phone number is required.");
+    valid = false;
+  } else if (!isValidPhoneNumber(phone)) {
+    showError("phoneError", "Enter 10 digit number only.");
+    valid = false;
+  } else {
+    showError("phoneError", "");
+  }
+
+  // Password validation
+  if (password === "") {
+    showError("passwordError", "Password is required.");
+    valid = false;
+  } else if (!isValidPassword(password)) {
+    showError("passwordError", "Use 8,A,a,& (uppercase, lowercase, number, special character)");
+    valid = false;
+  } else {
+    showError("passwordError", "");
+  }
+
+  // Navigate on success
+  if (valid) {
+    window.location.href = "todo.html";
+  }
+}
+
+// Restrict number input to digits only
+document.getElementById("phone").addEventListener("input", function () {
+  this.value = this.value.replace(/[^0-9]/g, '');
 });
-
-document.getElementById("loginForm").addEventListener("submit", function (e) {
-  e.preventDefault();
-
-  const phone = document.getElementById("phoneNumber").value.trim();
-  const code = document.getElementById("countryCode").value;
-  const pass = document.getElementById("password").value.trim();
-
-  if (!phone || !code || !pass) {
-    alert("Please fill in all fields.");
-    return;
-  }
-
-  if (!/^\d{10}$/.test(phone)) {
-    alert("Phone number must be exactly 10 digits.");
-    return;
-  }
-
-  // Password checks
-  const errors = [];
-  if (pass.length < 8 || pass.length > 12) {
-    errors.push("Password must be 8–12 characters long.");
-  }
-  if (!/[A-Z]/.test(pass)) {
-    errors.push("Include at least one uppercase letter.");
-  }
-  if (!/[a-z]/.test(pass)) {
-    errors.push("Include at least one lowercase letter.");
-  }
-  if (!/\d/.test(pass)) {
-    errors.push("Include at least one number.");
-  }
-  if (!/[!@#$%^&*(),.?":{}|<>]/.test(pass)) {
-    errors.push("Include at least one special character.");
-  }
-
-  if (errors.length > 0) {
-    alert("Password Error:\n" + errors.join("\n"));
-    return;
-  }
-
-  // All checks passed — navigate
-  window.location.href = "todo.html";
-});
-
-
