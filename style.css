@@ -60,6 +60,33 @@ input[type="password"] {
   width: 70%;
 }
 
+.password-wrapper {
+  position: relative;
+}
+
+.password-wrapper input {
+  width: 100%;
+  padding-right: 40px;
+}
+
+.password-wrapper i {
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #777;
+}
+
+
+.toggle-password {
+  position: absolute;
+  right: 10px;
+  cursor: pointer;
+  font-size: 18px;
+  user-select: none;
+}
+
 .error {
   color: red;
   font-size: 13px;
@@ -91,8 +118,9 @@ button:hover {
   color: #007bff;
   text-decoration: none;
 }
-.links p{
-  margin-top:15px;
+
+.links p {
+  margin-top: 15px;
 }
 
 .links a:hover {

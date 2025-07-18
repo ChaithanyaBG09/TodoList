@@ -57,3 +57,14 @@ function handleLogin() {
 document.getElementById("phone").addEventListener("input", function () {
   this.value = this.value.replace(/[^0-9]/g, '');
 });
+
+// Eye toggle for password visibility
+const togglePassword = document.getElementById("togglePassword");
+const passwordInput = document.getElementById("password");
+
+togglePassword.addEventListener("click", () => {
+  const type = passwordInput.getAttribute("type") === "password" ? "text" : "password";
+  passwordInput.setAttribute("type", type);
+  togglePassword.classList.toggle("fa-eye");
+  togglePassword.classList.toggle("fa-eye-slash");
+});
