@@ -12,11 +12,12 @@ body {
   justify-content: center;
   align-items: center;
   position: relative;
+  height:70px;
 }
 
 .header h1 {
   margin: 0 auto;
-  font-size: 24px;
+  font-size: 30px;
   text-align: center;
 }
 
@@ -27,15 +28,16 @@ body {
 }
 
 .profile-icon {
-  width: 35px;
-  height: 35px;
+  width: 45px;
+  height: 45px;
   border-radius: 50%;
   cursor: pointer;
+  margin-top:15px;
 }
 
 .dropdown {
   position: absolute;
-  top: 45px;
+  top: 60px;  /* Adjusted to appear BELOW the profile icon */
   right: 0;
   background-color: white;
   border: 1px solid #ccc;
