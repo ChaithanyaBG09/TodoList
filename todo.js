@@ -1,78 +1,52 @@
-const profileIcon = document.querySelector('.profile-icon');
-let logoutBtn = null;
+const taskInput = document.getElementById("taskInput");
+const taskContainer = document.getElementById("taskContainer");
+const noTaskMessage = document.getElementById("noTaskMessage");
 
-// Toggle logout button on profile icon click
-profileIcon.addEventListener('click', () => {
-  if (!logoutBtn) {
-    logoutBtn = document.createElement('button');
-    logoutBtn.textContent = 'Logout';
-    logoutBtn.className = 'logout-button';
-
-    logoutBtn.addEventListener('click', () => {
-      if (confirm('Are you sure you want to logout?')) {
-        alert('You have been logged out.');
-        window.location.href = 'login.html'; // or your desired page
-      }
-    });
-
-    document.body.appendChild(logoutBtn);
-  } else {
-    logoutBtn.remove();
-    logoutBtn = null;
-  }
-});
-
-const addTaskBtn = document.getElementById('addTaskBtn');
-const taskInput = document.getElementById('taskInput');
-const taskList = document.getElementById('taskList');
-
-// Add task
-addTaskBtn.addEventListener('click', () => {
+function addTask() {
   const taskText = taskInput.value.trim();
+  if (!taskText) return;
 
-  if (taskText === '') {
-    alert('Please enter a task.');
-    return;
-  }
+  noTaskMessage.style.display = "none";
 
-  const li = document.createElement('li');
-  li.className = 'task';
+  const taskItem = document.createElement("div");
+  taskItem.classList.add("task-item");
 
-  const span = document.createElement('span');
-  span.textContent = taskText;
+  const taskInputField = document.createElement("input");
+  taskInputField.type = "text";
+  taskInputField.value = taskText;
+  taskInputField.setAttribute("readonly", "true");
 
-  const editBtn = document.createElement('button');
-  editBtn.textContent = 'Edit';
-  editBtn.className = 'edit-btn';
+  const taskActions = document.createElement("div");
+  taskActions.classList.add("task-actions");
 
-  const deleteBtn = document.createElement('button');
-  deleteBtn.textContent = 'Delete';
-  deleteBtn.className = 'delete-btn';
-
-  li.appendChild(span);
-  li.appendChild(editBtn);
-  li.appendChild(deleteBtn);
-  taskList.appendChild(li);
-
-  taskInput.value = '';
-
-  span.addEventListener('click', () => {
-    document.querySelectorAll('.task').forEach(task => {
-      task.classList.remove('selected');
-    });
-    li.classList.add('selected');
-  });
-
-  editBtn.addEventListener('click', () => {
-    const newText = prompt('Edit your task:', span.textContent);
-    if (newText !== null && newText.trim() !== '') {
-      span.textContent = newText.trim();
+  const editBtn = document.createElement("button");
+  editBtn.textContent = "Edit";
+  editBtn.onclick = function () {
+    if (taskInputField.hasAttribute("readonly")) {
+      taskInputField.removeAttribute("readonly");
+      taskInputField.focus();
+      editBtn.textContent = "Save";
+    } else {
+      taskInputField.setAttribute("readonly", "true");
+      editBtn.textContent = "Edit";
     }
-  });
+  };
 
-  deleteBtn.addEventListener('click', () => {
-    if (confirm('Are you sure you want to delete this task?')) {
-      li.remove();
+  const deleteBtn = document.createElement("button");
+  deleteBtn.textContent = "Delete";
+  deleteBtn.onclick = function () {
+    taskItem.remove();
+    if (taskContainer.querySelectorAll(".task-item").length === 0) {
+      noTaskMessage.style.display = "block";
     }
-  });
-});
+  };
+
+  taskActions.appendChild(editBtn);
+  taskActions.appendChild(deleteBtn);
+
+  taskItem.appendChild(taskInputField);
+  taskItem.appendChild(taskActions);
+  taskContainer.appendChild(taskItem);
+
+  taskInput.value = "";
+}
