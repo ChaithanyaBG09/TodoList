@@ -7,22 +7,34 @@ body {
 }
 
 .header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px 30px;
-  background-color: #0077b6;
-  color: #fff;
   position: relative;
+  display: flex;
+  justify-content: center; /* center the title */
+  align-items: center;
+  padding: 10px 20px;
+  border-bottom: 1px solid #ccc;
+  background:#0077b6;
+  height:100px;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 50px;
+  font-weight: bold;
+  color:#ccc;
 }
 
 .profile-icon {
+  position: absolute;
+  right: 20px; /* Adjust spacing from the right edge */
   width: 40px;
   height: 40px;
   cursor: pointer;
   border-radius: 50%;
   background: #fff;
   padding: 5px;
+}
+
 }
 
 .main-container {
